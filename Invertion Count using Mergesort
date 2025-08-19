@@ -1,0 +1,43 @@
+def inversion_count(nums):
+    if len(nums)<=1:
+        return 0,nums
+    mid=len(nums)//2
+    li,left=inversion_count(nums[:mid])
+    ri,right=inversion_count(nums[mid:])
+    mi,merge_list=merge(left,right)
+    return li+ri+mi,merge_list
+
+def merge(left,right):
+    i=0
+    j=0
+    merge_list=[]
+    mi=0
+    while i<len(left) and j<len(right):
+        if left[i]<right[j]:
+            merge_list.append(left[i])
+            i+=1
+        else:
+            merge_list.append(right[j])
+            mi+=len(left)-i
+            j+=1
+    while i<len(left):
+        merge_list.append(left[i])
+        i+=1
+    while j<len(right):
+        merge_list.append(right[j])
+        j+=1
+    return mi,merge_list
+def pairs(nums):
+    result=[]
+    for i in range(len(nums)):
+        for j in range(i+1,len(nums)):
+            if nums[i]>nums[j]:
+                result.append((nums[i],nums[j])) 
+    return result
+
+nums=[12,14,9,8,5]
+count,sorted_list=inversion_count(nums)
+Pairs=pairs(nums)
+print(f"Inversion count={count}")
+print(f"Sorted List={sorted_list}")
+print(f"Inversion pairs={Pairs}")
