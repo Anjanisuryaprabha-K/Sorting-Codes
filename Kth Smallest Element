@@ -1,0 +1,23 @@
+def partition(start,end,arr):
+    i=start
+    pivot=arr[end]
+    for j in range(start,end):
+        if arr[j]<pivot:
+            arr[i],arr[j]=arr[j],arr[i]
+            i+=1
+    arr[i],arr[end]=arr[end],arr[i]
+    return i
+
+def kth_smallest(start,end,arr,k):
+    if start<=end:
+        pivot_index=partition(start,end,arr)
+        if pivot_index+1==k:
+            return arr[pivot_index]
+        elif k<pivot_index+1:
+            return kth_smallest(start,pivot_index-1,arr,k)
+        else:
+            return kth_smallest(pivot_index+1,end,arr,k)
+arr=[42,56,7,13,9,17,89]
+k=int(input())
+res=kth_smallest(0,len(arr)-1,arr,k)
+print(f"smallest element={res}\t",f"Sorted Array={arr}")
