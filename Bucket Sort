@@ -3,6 +3,7 @@ def bucket_sort(nums):
     bucket_list=[[] for i in range(n)]
     for value in nums:
         index=int(value*n)
+        if index>=n: index=n-1
         bucket_list[index].append(value)
     for sub_list in bucket_list:
         if len(sub_list)>1:
