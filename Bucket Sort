@@ -1,0 +1,15 @@
+def bucket_sort(nums):
+    n=len(nums)
+    bucket_list=[[] for i in range(n)]
+    for value in nums:
+        index=int(value*n)
+        bucket_list[index].append(value)
+    for sub_list in bucket_list:
+        if len(sub_list)>1:
+            sub_list.sort()
+    res=[]
+    for i in bucket_list:
+        res.extend(i)
+    print(f"Sorted list:{res}") 
+nums=[0.99,0.76,0.54,0.81,0.43]
+bucket_sort(nums)
